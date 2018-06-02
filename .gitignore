@@ -1,6 +1,12 @@
 # Chef
 .chef/*.pem
 .chef/encrypted_data_bag_secret
+.chef/
+Berksfile.lock
+.kitchen/
+.delivery
+
+
 
 # Ruby
 .rake_test_cache

@@ -66,11 +66,16 @@ Vagrant.configure("2") do |config|
      sudo apt-get install vim tree -y
      sudo apt-get install ruby ruby-dev -y     
 
+     sudo apt-get install apt-transport-https ca-certificates gnupg2 software-properties-common -y
+ 
      #Chef
-     curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P chefdk -c stable -v 2.5.3
+     curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P chefdk -c stable -v 3.0.36
      
+     sudo apt-get update -y  
+     sudo apt install -y virtualbox vagrant  
+
      #Vagrant and kitchen plugins 
-     sudo gem install vagrant kitchen-vagrant
+     #gem install kitchen-vagrant
    
      #verify if chef is installed
      chef-client --version
