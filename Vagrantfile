@@ -68,15 +68,25 @@ Vagrant.configure("2") do |config|
 
      sudo apt-get install apt-transport-https ca-certificates gnupg2 software-properties-common -y
  
+    #Virtual box
+     sudo echo "deb https://download.virtualbox.org/virtualbox/debian $(lsb_release -cs) contrib" >> /etc/apt/sources.list
+
+     sudo wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
+
+     sudo apt-get update
+     sudo apt-get install virtualbox-5.2 -y
+
      #Chef
      curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P chefdk -c stable -v 3.0.36
-     
-     sudo apt-get update -y  
-     sudo apt install -y virtualbox vagrant  
+         
+     #Vagrant
+     sudo wget -q https://releases.hashicorp.com/vagrant/2.1.1/vagrant_2.1.1_x86_64.deb -P /tmp
+     sudo dpkg -i /tmp/vagrant_2.1.1_x86_64.deb
 
-     #Vagrant and kitchen plugins 
-     #gem install kitchen-vagrant
-   
+
+     
+
+  
      #verify if chef is installed
      chef-client --version
           

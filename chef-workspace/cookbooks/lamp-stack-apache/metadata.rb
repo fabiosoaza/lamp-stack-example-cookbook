@@ -1,0 +1,8 @@
+name 'lamp-stack-apache'
+maintainer 'Fábio Souza'
+maintainer_email 'fabio@example.com'
+license 'MIT'
+description 'Installs/Configures apache'
+long_description 'Installs/Configures apache'
+version '0.1.0'
+depends 'httpd', '~> 0.6.2'

@@ -1,0 +1,14 @@
+<html>
+<head>
+<title>Hello World</title>
+</head>
+<body>
+<h1>Hello, World!</h1><br/>
+ip address: <%= node['ipaddress'] %><br/>
+hostname: <%= node['hostname'] %><br/>
+memory: <%= node['memory']['total'] %><br/>
+platform: <%= node['platform'] %><br/>
+
+parameter: <%=@ipaddress%>
+</body>
+</html>
