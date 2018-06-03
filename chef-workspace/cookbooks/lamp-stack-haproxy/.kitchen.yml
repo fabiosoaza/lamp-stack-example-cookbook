@@ -1,0 +1,33 @@
+---
+driver:
+  name: vagrant
+  provision: true
+  vagrantfiles:
+    - "test/vagrant.rb"
+
+provisioner:
+  name: chef_zero
+  always_update_cookbooks: true
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: ubuntu-16.04
+suites:
+  - name: default
+    run_list:
+      - recipe[lamp-stack-haproxy::default]
+    attributes:
+        haproxy:
+           members: 
+             - hostname: 'localhost'
+               ipaddress: '127.0.0.1'
+               port : '8181'
+               ssl_port: '8181'
+             - hostname: 'localhost'
+               ipaddress: '127.0.0.1'
+               port : '8182'
+               ssl_port: '8182'
+          
+
