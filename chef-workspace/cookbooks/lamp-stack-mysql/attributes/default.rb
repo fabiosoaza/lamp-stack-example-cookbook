@@ -1,0 +1,6 @@
+default['lamp']['host'] = '127.0.0.1'
+default['lamp']['database']['dbname'] = 'default'
+default['lamp']['database']['admin_username'] = 'dbadmin'
+default['lamp']['database']['admin_password'] = 'admin_password'
+default['lamp']['database']['root_username'] = 'root'
+default['lamp']['database']['root_password'] = 'root_password'
