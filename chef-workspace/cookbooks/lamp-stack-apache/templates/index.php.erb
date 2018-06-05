@@ -1,14 +1,15 @@
 <html>
 <head>
-<title>Hello World</title>
+<title>Page Test</title>
 </head>
 <body>
-<h1>Hello, World!</h1><br/>
+<h1><?php echo ucwords('hello world!'); ?>!</h1><br/>
+
+<hr/>
 ip address: <%= node['ipaddress'] %><br/>
 hostname: <%= node['hostname'] %><br/>
 memory: <%= node['memory']['total'] %><br/>
 platform: <%= node['platform'] %><br/>
-
 parameter: <%=@ipaddress%>
 </body>
 </html>
