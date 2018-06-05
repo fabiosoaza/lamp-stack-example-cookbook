@@ -4,7 +4,7 @@
 #
 # Copyright:: 2018, The Authors, All Rights Reserved.
  mysql_connection_info = {
-     host: node['lamp']['host'] ,
+     host: node['lamp']['database']['host'] ,
      username: node['lamp']['database']['root_username'],
      password: node['lamp']['database']['root_password']
  }
@@ -14,7 +14,7 @@ mysql_client 'default' do
  end
 
 mysql_service 'default' do   
-    port '3306' 
+    port node['lamp']['database']['port'] 
     bind_address '0.0.0.0'
     initial_root_password node['lamp']['database']['root_password']
     action [:create, :start]
@@ -34,7 +34,7 @@ end
      connection mysql_connection_info 
      password node['lamp']['database']['admin_password'] 
      database_name node['lamp']['database']['dbname'] 
-     host node['lamp']['host'] 
+     host node['lamp']['database']['host'] 
      action [:create, :grant]
  end
 

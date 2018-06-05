@@ -1,4 +1,5 @@
-default['lamp']['host'] = '127.0.0.1'
+default['lamp']['database']['host'] = '127.0.0.1'
+default['lamp']['database']['port']='3306'
 default['lamp']['database']['dbname'] = 'default'
 default['lamp']['database']['admin_username'] = 'dbadmin'
 default['lamp']['database']['admin_password'] = 'admin_password'
