@@ -1,0 +1,8 @@
+source 'https://supermarket.chef.io'
+
+
+metadata
+
+cookbook 'lamp-stack-apache', path: '../lamp-stack-apache'
+cookbook 'lamp-stack-haproxy', path: '../lamp-stack-haproxy'
+cookbook 'lamp-stack-mysql', path: '../lamp-stack-mysql'

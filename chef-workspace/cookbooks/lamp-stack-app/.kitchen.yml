@@ -1,0 +1,84 @@
+---
+driver:
+  name: vagrant
+  network:
+    - ["public_network", bridge: "Default Switch"]
+
+provisioner:
+  name: chef_zero
+  always_update_cookbooks: true
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: web1
+    run_list:
+      - recipe[lamp-stack-app::web]  
+    driver:
+      box: bento/ubuntu-16.04
+    driver_config:
+      network:
+        - ['private_network', {ip: '192.168.33.11'}]      
+    attributes:
+      lamp:
+        database:
+          host: '192.168.33.14'   
+          admin_username: "yet_another_admin"      
+          admin_password: "yet_another_admin_password" 
+          dbname: "custom_database"
+          port: "3306"  
+
+  - name: web2
+    run_list:
+      - recipe[lamp-stack-app::web]    
+    driver:
+      box: bento/ubuntu-16.04      
+    driver_config:
+      network:
+        - ['private_network', {ip: '192.168.33.12'}]         
+    attributes:
+      lamp:
+        database:
+          host: '192.168.33.14'   
+          admin_username: "yet_another_admin"      
+          admin_password: "yet_another_admin_password" 
+          dbname: "custom_database"
+          port: "3306"  
+  
+  - name: balancer
+    run_list:
+      - recipe[lamp-stack-app::balancer]    
+    driver:
+      box: bento/ubuntu-16.04
+    driver_config:
+      network:
+        - ['private_network', {ip: '192.168.33.13'}]   
+    attributes:
+        haproxy:
+           members: 
+             - hostname: 'app-web01'
+               ipaddress: '192.168.33.11'
+               port : '80'
+               ssl_port: '80'              
+             - hostname: 'app-web02'
+               ipaddress: '192.168.33.12'
+               port : '80'
+               ssl_port: '80'                
+
+  - name: database
+    run_list:
+      - recipe[lamp-stack-app::database]    
+    driver:
+      box: bento/ubuntu-16.04   
+      vagrantfiles:
+        - "test/vagrant.rb"   
+    driver_config:
+      network:
+        - ['private_network', {ip: '192.168.33.14'}]        
+
+suites:
+  - name: app
+    run_list: []      
+    verifier:
+    attributes:
