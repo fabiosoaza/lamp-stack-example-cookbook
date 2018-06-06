@@ -49,6 +49,9 @@ platforms:
   - name: balancer
     run_list:
       - recipe[lamp-stack-app::balancer]    
+    verifier:
+      inspec_tests:
+        - test/integration
     driver:
       box: bento/ubuntu-16.04
     driver_config:
@@ -70,7 +73,8 @@ platforms:
     run_list:
       - recipe[lamp-stack-app::database]    
     driver:
-      box: bento/ubuntu-16.04   
+      box: bento/ubuntu-16.04 
+      provision: true  
       vagrantfiles:
         - "test/vagrant.rb"   
     driver_config:
@@ -78,7 +82,23 @@ platforms:
         - ['private_network', {ip: '192.168.33.14'}]        
 
 suites:
+#run this suite only to provision
   - name: app
-    run_list: []      
+    run_list:
+
+
+#run tests        
+  - name: run-tests
+    run_list:             
     verifier:
-    attributes:
+      inspec_tests:
+        - test/integration
+      sudo: true
+      sudo_command: 'echo teste'    
+    excludes:
+      - balancer
+      - web1   
+      - web2
+      - database
+        
+
