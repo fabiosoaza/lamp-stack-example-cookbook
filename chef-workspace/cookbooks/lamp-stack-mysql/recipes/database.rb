@@ -34,7 +34,8 @@ end
      connection mysql_connection_info 
      password node['lamp']['database']['admin_password'] 
      database_name node['lamp']['database']['dbname'] 
-     host node['lamp']['database']['host'] 
+     host '%' 
+     privileges    [:all]
      action [:create, :grant]
  end
 
